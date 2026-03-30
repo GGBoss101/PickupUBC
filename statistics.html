@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics - Pickup UBC</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo-container">
+                <div class="logo"><img src = "images/logo.jpg" alt="Pickup UBC Logo"></div>
+                <span class="club-name">Pickup UBC</span>
+            </a>
+            <ul>
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="statistics.html" class="nav-link active">Statistics</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section>
+            <h1>Our Impact</h1>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">25</div>
+                    <div class="stat-label">Cleanups Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">675</div>
+                    <div class="stat-label">lb of Trash Collected</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">234</div>
+                    <div class="stat-label">Past Attendees</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">207</div>
+                    <div class="stat-label">lb of Recycled Material</div>
+                </div>
+            </div>
+
+            <h2>Yearly Collections</h2>
+            <div class="chart">
+                <div class="chart-bar">
+                    <div class="chart-label">2024 W1</div>
+                    <div class="chart-bar-container">
+                        <div class="chart-bar-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="chart-value">229 lb</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">2024 W2</div>
+                    <div class="chart-bar-container">
+                        <div class="chart-bar-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="chart-value">229 lb</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">2025 W1</div>
+                    <div class="chart-bar-container">
+                        <div class="chart-bar-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="chart-value">217 lb</div>
+                </div>
+            </div>
+
+            <h2>Waste Breakdown by Year</h2>
+            <div class="chart">
+                <div class="year-selector">
+                    <label for="year-dropdown">Select Year:</label>
+                    <select id="year-dropdown" onchange="switchChart()">
+                        <option value="2024W1">2024 W1</option>
+                        <option value="2024W2">2024 W2</option>
+                        <option value="2025W1" selected>2025 W1</option>
+                    </select>
+                </div>
+                <div class="pie-chart-container">
+                    <canvas id="wasteChart" style="display: block;"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 Pickup UBC. Making the world cleaner, one cleanup at a time.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/pickupubc/" target="_blank" title="Instagram" rel="noopener noreferrer">Instagram</a>
+                <a href="mailto:pickupubcvan@gmail.com" title="Email" rel="noopener noreferrer">Email</a>
+                <a href="https://amsclubs.ca/pickupubc/" target="_blank" title="AMS Page" rel="noopener noreferrer">AMS Page</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfeic7vXnaq8yEGBkF9zFfaDYOiedfs0pHiyhYfD2tG6GfVzQ/viewform" target="_blank" title="Mailing List" rel="noopener noreferrer">Mailing List</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var bars = document.getElementsByClassName("chart-bar-fill");
+        /*exact values: var values = [229.15, 228.62, 217.39];*/
+        //rounded values for better visual scaling
+        var values = [229, 229, 218];
+        var maxValue = 250; // Set a max value for scaling
+        bars[0].style.width = (values[0] / maxValue * 100) + "%";
+        bars[1].style.width = (values[1] / maxValue * 100) + "%";
+        bars[2].style.width = (values[2] / maxValue * 100) + "%";
+
+        const chartData = {
+            '2024W1': [70.22, 158.93],
+            '2024W2': [66.25, 162.37],
+            '2025W1': [70.22, 147.17]
+        };
+
+        const chartColors = {
+            '2024W1': ['#D55E00', '#0072B2'],
+            '2024W2': ['#224C7C', '#94C1CA'],
+            '2025W1': ['#FFCE56', '#4BC0C0']
+        };
+
+        let mainChart; // Global variable to hold the single instance
+
+        function switchChart() {
+            let year = document.getElementById('year-dropdown').value;
+
+            if (mainChart) {
+                mainChart.destroy();
+            }
+
+            mainChart = new Chart(document.getElementById('wasteChart'), {
+                type: 'pie',
+                data: {
+                    labels: ['Recyclable', 'Non-recyclable'],
+                    datasets: [{
+                        data: chartData[year],
+                        backgroundColor: chartColors[year]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    animation: {
+                        duration: 1000 // Ensures it "pops" in every time
+                    },
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+        }
+        window.onload = switchChart;
+    </script>
+</body>
+</html>
