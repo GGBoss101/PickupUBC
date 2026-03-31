@@ -109,12 +109,14 @@
         //rounded values for better visual scaling
         var values = [229, 229, 218];
         var maxValue = 250; // Set a max value for scaling
-        bars[0].style.width = 0 + "%";
-        bars[1].style.width = 0 + "%";
-        bars[2].style.width = 0 + "%";
-        bars[0].style.width = (values[0] / maxValue * 100) + "%";
-        bars[1].style.width = (values[1] / maxValue * 100) + "%";
-        bars[2].style.width = (values[2] / maxValue * 100) + "%";
+        window.addEventListener('load', function() {
+            bars[0].style.width = 0 + "%";
+            bars[1].style.width = 0 + "%";
+            bars[2].style.width = 0 + "%";
+            bars[0].style.width = (values[0] / maxValue * 100) + "%";
+            bars[1].style.width = (values[1] / maxValue * 100) + "%";
+            bars[2].style.width = (values[2] / maxValue * 100) + "%";
+        });
 
         const chartData = {
             '2024W1': [70.22, 158.93],
