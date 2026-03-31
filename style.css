@@ -64,7 +64,28 @@ nav {
     color: white;
 }
 
-nav ul {
+.menu-toggle-checkbox {
+    display: none;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s;
+    opacity: 0.9;
+}
+
+.menu-toggle:hover {
+    color: #64b5f6;
+    opacity: 1;
+}
+
+.nav-menu {
     display: flex;
     list-style: none;
     gap: 2.5rem;
@@ -82,6 +103,51 @@ nav a:hover,
 nav a.active {
     color: #64b5f6;
     opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    nav {
+        flex-wrap: wrap;
+        position: relative;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: calc(100% + 1.5rem);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        margin: 0;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        background: #0055b8;
+        border-top: 2px solid #003d82;
+    }
+
+    .menu-toggle-checkbox:checked ~ .nav-menu {
+        max-height: 500px; /* Arbitrary large value to allow menu to expand */
+    }
+
+    .nav-menu li {
+        padding: 1rem 2rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-menu li:last-child {
+        border-bottom: none;
+    }
+
+    .logo-container {
+        flex: 1;
+    }
 }
 
 /* Main Content */
