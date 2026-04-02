@@ -473,3 +473,11 @@ footer p {
     max-width: 400px;
     margin: 0 auto;
 }
+
+/* Images Formatting */
+.images-landscape {
+    height: 100%;
+}
+.images-portrait {
+    width: 100%;
+}
