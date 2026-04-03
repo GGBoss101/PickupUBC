@@ -14,6 +14,20 @@ const data = {"09/13/2025": [13.44, 3.86],
     "11/30/2025": [30.98, 7.6]
 }
 
+const imageSources = {"09/28/2025": "images/IMG_1.webp", 
+    "10/05/2025": "images/IMG_2.webp",
+    "10/19/2025": "images/IMG_4.webp", 
+    "11/02/2025": "images/IMG_5.webp",
+    "11/23/2025": "images/IMG_6.webp", 
+    "11/30/2025": "images/IMG_7.webp"}
+
+const imageOrientations = {"09/28/2025": "landscape", 
+    "10/05/2025": "landscape",
+    "10/19/2025": "landscape", 
+    "11/02/2025": "landscape",
+    "11/23/2025": "portrait", 
+    "11/30/2025": "landscape"}
+
 const imageDates = ["09/28/2025", 
     "10/05/2025", 
     "10/19/2025", 
@@ -33,6 +47,17 @@ Array.from(document.getElementsByClassName('date')).forEach((barFill, index) => 
         day: 'numeric'
     });
     barFill.innerHTML = formatter.format(dateObj);
+});
+
+//load in the images
+Array.from(document.getElementsByClassName('images')).forEach((img, index) => {
+    img.src = imageSources[imageDates[index]];
+    img.alt = `Gallery Image ${index + 1}`;
+    if (imageOrientations[imageDates[index]] === "landscape") {
+        img.classList.add("images-landscape");
+    } else {
+        img.classList.add("images-portrait");
+    }
 });
 
 //load in the bar fills
