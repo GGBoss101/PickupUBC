@@ -60,16 +60,19 @@ Array.from(document.getElementsByClassName('images')).forEach((img, index) => {
     }
 });
 
-//initialize the bar fills to 0 width for animation
-Array.from(document.getElementsByClassName('chart-bar-fill')).forEach((barFill) => {
-    barFill.style.width = `0%`;
-});
+//animation should play out every time window loads
+window.addEventListener('load', function() {
+    //initialize the bar fills to 0 width for animation
+    Array.from(document.getElementsByClassName('chart-bar-fill')).forEach((barFill) => {
+        barFill.style.width = `0%`;
+    });
 
-//load in the bar fills
-Array.from(document.getElementsByClassName('chart-bar-fill')).forEach((barFill, index) => {
-    let isRecyclable = index % 2; // Odd indices are recyclable
-    let value = data[imageDates[Math.floor(index / 2)]][isRecyclable];
-    barFill.style.width = `${(value / maxValue) * 100}%`;
+    //load in the bar fills
+    Array.from(document.getElementsByClassName('chart-bar-fill')).forEach((barFill, index) => {
+        let isRecyclable = index % 2; // Odd indices are recyclable
+        let value = data[imageDates[Math.floor(index / 2)]][isRecyclable];
+        barFill.style.width = `${(value / maxValue) * 100}%`;
+    });
 });
 
 //load in the bar labels
