@@ -60,6 +60,11 @@ Array.from(document.getElementsByClassName('images')).forEach((img, index) => {
     }
 });
 
+//initialize the bar fills to 0 width for animation
+Array.from(document.getElementsByClassName('chart-bar-fill')).forEach((barFill) => {
+    barFill.style.width = `0%`;
+});
+
 //load in the bar fills
 Array.from(document.getElementsByClassName('chart-bar-fill')).forEach((barFill, index) => {
     let isRecyclable = index % 2; // Odd indices are recyclable
