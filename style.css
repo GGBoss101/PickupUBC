@@ -14,7 +14,11 @@ body {
 
 /* Header */
 header {
-    background: #0055b8;
+    /*original color: #0055b8*/
+    /*alternate color (logo color): #0d2241*/
+    /*border original color: #003d82*/
+    /*alternate border color: #0055b8*/
+    background: #0d2241;
     border-bottom: 3px solid #003d82;
     padding: 1.5rem 0;
     position: sticky;
@@ -48,7 +52,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #0055b8;
+    color: #0d2241;
     font-size: 24px;
 }
 
@@ -57,6 +61,7 @@ nav {
     height: 100%;
     border-radius: 6px;
     object-fit: cover;
+    border: 1px solid white;
 }
 
 .club-name {
@@ -129,7 +134,7 @@ nav a.active {
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.3s ease;
-        background: #0055b8;
+        background: #0d2241;
         border-top: 2px solid #003d82;
     }
 
@@ -164,13 +169,13 @@ section {
 
 h1 {
     font-size: 2.5rem;
-    color: #0055b8;
+    color: #0d2241;
     margin-bottom: 2rem;
 }
 
 h2 {
     font-size: 1.8rem;
-    color: #0055b8;
+    color: #0d2241;
     margin-bottom: 1.5rem;
     margin-top: 2rem;
 }
@@ -181,7 +186,7 @@ h2:first-child {
 
 h3 {
     font-size: 1.5rem;
-    color: #0055b8;
+    color: #0d2241;
     margin-bottom: 1.5rem;
     margin-top: 2rem;
 }
@@ -195,19 +200,21 @@ p {
 /* Home Page */
 .hero-title {
     font-size: 3rem;
-    color: #0055b8;
+    color: #0d2241;
     margin-bottom: 1rem;
 }
 
 .hero-subtitle {
     font-size: 1.2rem;
-    color: #0078d4;
+    /*original color: #0078d4*/
+    /*alternate color: #0d2241*/
+    color: #0d2241;
     margin-bottom: 2rem;
 }
 
 .cta-button {
     display: inline-block;
-    background: #0055b8;
+    background: #0d2241;
     color: white;
     padding: 12px 32px;
     border-radius: 6px;
@@ -272,7 +279,7 @@ p {
     border-radius: 8px;
     text-align: center;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    border-left: 4px solid #0055b8;
+    border-left: 4px solid #0d2241;
     transition: transform 0.2s;
 }
 
@@ -283,7 +290,7 @@ p {
 
 .stat-number {
     font-size: 2.5rem;
-    color: #0055b8;
+    color: #0d2241;
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
@@ -311,7 +318,7 @@ p {
 .chart-label {
     width: 120px;
     font-weight: 600;
-    color: #0055b8;
+    color: #0d2241;
 }
 
 .chart-bar-container {
@@ -324,14 +331,14 @@ p {
 
 .chart-bar-fill {
     height: 100%;
-    background: #0078d4;
+    background: #0d2241;
     transition: width 0.8s;
 }
 
 .chart-value {
     margin-left: 1rem;
     font-weight: 600;
-    color: #0055b8;
+    color: #0d2241;
     min-width: 50px;
     white-space: pre;
 }
@@ -343,7 +350,7 @@ p {
     border-radius: 8px;
     margin: 2rem 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    border-left: 4px solid #0055b8;
+    border-left: 4px solid #0d2241;
     transition: transform 0.2s;
 }
 
@@ -353,7 +360,7 @@ p {
 }
 
 .about-section h3 {
-    color: #0055b8;
+    color: #0d2241;
     margin-bottom: 1rem;
     font-size: 1.3rem;
 }
@@ -364,7 +371,7 @@ p {
 
 /* Footer */
 footer {
-    background: #0055b8;
+    background: #0d2241;
     border-top: 3px solid #003d82;
     padding: 2rem 0;
     margin-top: 2rem;
@@ -438,13 +445,13 @@ footer p {
 
 .year-selector label {
     font-weight: 600;
-    color: #0055b8;
+    color: #0d2241;
     font-size: 1.1rem;
 }
 
 .year-selector select {
     padding: 10px 16px;
-    border: 2px solid #0055b8;
+    border: 2px solid #0d2241;
     border-radius: 6px;
     font-size: 1rem;
     color: #2c3e50;
@@ -453,7 +460,7 @@ footer p {
     transition: all 0.2s;
     font-weight: 500;
     appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230055b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d2241' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 20px;
@@ -462,13 +469,13 @@ footer p {
 
 .year-selector select:hover {
     box-shadow: 0 2px 8px rgba(0, 85, 184, 0.2);
-    border-color: #0078d4;
+    border-color: #0d2241;
 }
 
 .year-selector select:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(0, 85, 184, 0.1);
-    border-color: #0078d4;
+    border-color: #0d2241;
 }
 
 .year-selector select option {
