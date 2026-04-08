@@ -227,7 +227,9 @@ p {
 }
 
 .cta-button:hover {
-    background: #003d82;
+    /*original color: #003d82*/
+    /*alternate color: #64b5f6*/
+    background: #025497;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 85, 184, 0.2);
 }
