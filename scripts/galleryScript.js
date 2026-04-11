@@ -60,6 +60,8 @@ Array.from(document.getElementsByClassName('images')).forEach((img, index) => {
     }
 });
 
+/*
+
 //animation should play out every time window loads
 window.addEventListener('load', function() {
     //initialize the bar fills to 0 width for animation
@@ -85,3 +87,5 @@ Array.from(document.getElementsByClassName('chart-value')).forEach((barLabel, in
     valueString = valueString.padStart(8, '\u2007'); // Pad with spaces to ensure consistent width
     barLabel.innerHTML = valueString;
 });
+
+*/

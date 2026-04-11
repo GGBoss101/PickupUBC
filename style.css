@@ -87,7 +87,7 @@ nav {
 }
 
 .menu-toggle:hover {
-    color: #64b5f6;
+    color: #d6b42e;
     opacity: 1;
 }
 
@@ -105,9 +105,11 @@ nav a {
     opacity: 0.9;
 }
 
+/* original hover color: #64b5f6 */
+/* alternate hover color: #d6b42e */
 nav a:hover,
 nav a.active {
-    color: #64b5f6;
+    color: #d6b42e;
     opacity: 1;
 }
 
@@ -410,7 +412,7 @@ footer p {
 }
 
 .social-links a:hover {
-    color: #64b5f6;
+    color: #d6b42e;
     opacity: 1;
 }
 
