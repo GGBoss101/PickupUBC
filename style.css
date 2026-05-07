@@ -113,7 +113,7 @@ nav a.active {
     opacity: 1;
 }
 
-/* Responsive */
+/* Responsive menu*/
 @media (max-width: 768px) {
     nav {
         flex-wrap: wrap;
@@ -315,6 +315,7 @@ p {
 
 .chart-bar {
     display: flex;
+    flex-direction: row;
     align-items: center;
     margin-bottom: 1.5rem;
 }
@@ -345,6 +346,48 @@ p {
     color: #0d2241;
     min-width: 50px;
     white-space: pre;
+}
+
+/* Responsive Stats Bar Chart */
+@media (max-width: 768px) {
+    .chart-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        background: white;
+        width: 100%;
+        height: 100px;
+    }
+
+    .chart-label {
+        width: auto;
+        margin-right: auto;
+        margin-bottom: 0.5rem;
+    }
+
+    .chart-bar-container {
+        width: 100%;
+        height: 30px;
+        background: #e8f0f8;
+        border-radius: 4px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    .chart-bar-fill {
+        height: 100%;
+        background: #0d2241;
+        transition: width 0.8s;
+    }
+
+    .chart-value {
+        font-weight: 600;
+        color: #0d2241;
+        white-space: pre;
+        margin-left: auto;
+        margin-top: 0.5rem;
+    }
 }
 
 /* About */
@@ -416,7 +459,7 @@ footer p {
     opacity: 1;
 }
 
-/* Responsive */
+/* Responsive Gallery + General */
 @media (max-width: 768px) {
     .hero-title {
         font-size: 2rem;
