@@ -18,7 +18,7 @@ export default function Layout() {
         <nav>
           <Link to="/" className="logo-container">
             <div className="logo">
-              <img src="/images/logo.jpg" alt="Pickup UBC Logo" />
+              <img src={`${import.meta.env.BASE_URL}images/logo.jpg`} alt="Pickup UBC Logo" />
             </div>
             <span className="club-name">Pickup UBC</span>
           </Link>
