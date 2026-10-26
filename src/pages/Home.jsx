@@ -58,7 +58,7 @@ export default function Home() {
       <section className="section container">
         <SectionTitle kicker="Player 1 ready">Welcome to Pickup UBC</SectionTitle>
         <p className="lead">
-          We are a dedicated group committed to environmental sustainability through organized trash
+          We are a group of UBC students committed to environmental sustainability through organized trash
           collection initiatives. Join us in making a difference for our planet and our community.
         </p>
         <div className="stats-grid">
