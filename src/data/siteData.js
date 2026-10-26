@@ -7,6 +7,6 @@ export const links = {
 }
 
 export const schedule = [
-  { day: 'WED', time: '4 – 5 PM' },
-  { day: 'SUN', time: '12 – 1 PM' },
+  { day: 'WED', time: '4:30 – 5:30 PM' },
+  { day: 'SUN', time: '12:00 – 1:00 PM' },
 ]

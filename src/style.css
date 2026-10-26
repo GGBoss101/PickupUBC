@@ -551,6 +551,18 @@ a:hover { color: var(--sky); }
     background: var(--navy);
 }
 .photo-frame:hover { transform: translate(-4px, -4px) rotate(-1deg); }
+
+/* Home page photos: a polaroid with the cleanup date written underneath */
+.polaroid { aspect-ratio: auto; padding-bottom: 0; text-decoration: none; }
+.polaroid img { aspect-ratio: 4 / 3; height: auto; }
+.polaroid-date {
+    display: block;
+    padding: .35rem 0 .45rem;
+    font-size: 1.3rem;
+    text-align: center;
+    color: var(--ink);
+}
+.polaroid:hover::after { bottom: 52px; }
 .photo-frame:hover::after {
     content: '▶ VIEW';
     position: absolute;
@@ -688,7 +700,7 @@ a:hover { color: var(--sky); }
 .bin-value.non-recyclable { color: var(--pink); }
 .bin-label { margin-top: .5rem; color: var(--cream-dim); }
 
-.runs-chart { position: relative; height: 360px; }
+.progress-chart { position: relative; height: 360px; }
 
 /* --------------------------------------------------------------------------
    About (RPG dialog boxes)
@@ -871,7 +883,7 @@ a:hover { color: var(--sky); }
     .chart-bar { grid-template-columns: 1fr auto; gap: .5rem 1rem; }
     .chart-bar-container { grid-column: 1 / -1; grid-row: 2; }
 
-    .runs-chart { height: 300px; }
+    .progress-chart { height: 300px; }
 
     .save-card.is-wide { grid-column: auto; }
     .save-photos { grid-auto-flow: row; }

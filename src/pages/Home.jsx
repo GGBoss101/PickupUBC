@@ -17,6 +17,8 @@ const steps = [
   { title: 'Collect & sort', text: 'Clear the area, sort recyclables from trash, and have your score climb.' },
 ]
 
+const shortDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+
 // The four most recent photos, newest first.
 const latestPhotos = allGalleryData
   .filter((entry) => entry.images?.length)
@@ -104,8 +106,9 @@ export default function Home() {
         <SectionTitle kicker="Replays">Latest screenshots</SectionTitle>
         <div className="photo-strip">
           {latestPhotos.map((photo) => (
-            <Link key={photo.src} to="/gallery" className="photo-frame">
-              <img src={photo.src} alt={`Cleanup on ${photo.date}`} loading="lazy" />
+            <Link key={photo.src} to="/gallery" className="photo-frame polaroid">
+              <img src={photo.src} alt={`Cleanup on ${shortDate.format(new Date(photo.date))}`} loading="lazy" />
+              <span className="polaroid-date">{shortDate.format(new Date(photo.date))}</span>
             </Link>
           ))}
         </div>

@@ -9,7 +9,6 @@ import StatCard from '../components/StatCard.jsx'
 import ChartBar from '../components/ChartBar.jsx'
 import { sprites } from '../assets/sprites.js'
 import { stats, sessionalCollections, chartData, chartColors, termOptions } from '../data/statisticsData.js'
-import { allGalleryData } from '../data/galleryData.js'
 
 Chart.register(ChartDataLabels)
 Chart.defaults.font.family = "'VT323', monospace"
@@ -18,17 +17,23 @@ Chart.defaults.color = '#f5efd9'
 
 const statSprites = [sprites.flag, sprites.trashBag, sprites.mushroom, sprites.binGreen]
 
-const shortDate = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' })
-
-// Individual cleanups that have weigh-in data (waste[0] = non-recyclable, waste[1] = recyclable).
-const runs = allGalleryData.filter((entry) => entry.waste[0] + entry.waste[1] > 0)
+// Running totals after each term (chartData values are [recyclable, non-recyclable]),
+// so the chart reads like a score climbing over time.
+let runningTotal = 0
+let runningRecycled = 0
+const progress = termOptions.map(({ value, label }) => {
+  const [recyclable, nonRecyclable] = chartData[value]
+  runningTotal += recyclable + nonRecyclable
+  runningRecycled += recyclable
+  return { label, total: Math.round(runningTotal), recycled: Math.round(runningRecycled) }
+})
 
 export default function Statistics() {
   useDocumentTitle('Statistics - Pickup UBC')
   const [selectedTerm, setSelectedTerm] = useState(termOptions[termOptions.length - 1].value)
   const [barsRef, barsInView] = useInView()
   const pieRef = useRef(null)
-  const runsRef = useRef(null)
+  const progressRef = useRef(null)
 
   const [recyclable, nonRecyclable] = chartData[selectedTerm]
   const termTotal = recyclable + nonRecyclable
@@ -76,25 +81,51 @@ export default function Statistics() {
   }, [selectedTerm])
 
   useEffect(() => {
-    const chart = new Chart(runsRef.current, {
-      type: 'bar',
+    const chart = new Chart(progressRef.current, {
+      type: 'line',
       data: {
-        labels: runs.map((r) => shortDate.format(new Date(r.date))),
+        labels: progress.map((p) => p.label),
         datasets: [
-          { label: 'Recyclable', data: runs.map((r) => r.waste[1]), backgroundColor: '#1fa774', borderColor: '#0b0d24', borderWidth: 2 },
-          { label: 'Non-recyclable', data: runs.map((r) => r.waste[0]), backgroundColor: '#e0457b', borderColor: '#0b0d24', borderWidth: 2 },
+          {
+            label: 'All waste collected',
+            data: progress.map((p) => p.total),
+            borderColor: '#f7d154',
+            backgroundColor: 'rgba(247, 209, 84, 0.15)',
+            fill: 'origin',
+          },
+          {
+            label: 'Recycled',
+            data: progress.map((p) => p.recycled),
+            borderColor: '#1fa774',
+            backgroundColor: 'rgba(31, 167, 116, 0.25)',
+            fill: 'origin',
+          },
         ],
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        layout: { padding: { top: 28 } },
+        elements: {
+          line: { borderWidth: 4, tension: 0 },
+          point: { pointStyle: 'rect', radius: 7, hoverRadius: 9, borderColor: '#0b0d24', borderWidth: 3 },
+        },
         scales: {
-          x: { stacked: true, grid: { display: false } },
-          y: { stacked: true, title: { display: true, text: 'lb' }, grid: { color: 'rgba(245, 239, 217, 0.12)' } },
+          x: { offset: true, grid: { display: false } },
+          y: { beginAtZero: true, grace: '10%', title: { display: true, text: 'lb (running total)' }, grid: { color: 'rgba(245, 239, 217, 0.12)' } },
         },
         plugins: {
           legend: { position: 'bottom', labels: { boxWidth: 16, boxHeight: 16 } },
-          datalabels: { display: false },
+          datalabels: {
+            // Totals above the yellow line, recycled below the green one; hidden on
+            // narrow screens where they would collide.
+            display: (ctx) => ctx.chart.width > 520,
+            align: (ctx) => (ctx.datasetIndex === 0 ? 'top' : 'bottom'),
+            offset: 8,
+            color: (ctx) => ctx.dataset.borderColor,
+            font: { size: 20 },
+            formatter: (value) => `${value} lb`,
+          },
           tooltip: {
             backgroundColor: '#0b0d24',
             borderColor: '#f7d154',
@@ -170,10 +201,14 @@ export default function Statistics() {
       </section>
 
       <section className="container section">
-        <SectionTitle kicker="Run history">Cleanup by cleanup</SectionTitle>
+        <SectionTitle kicker="Progress">Total collected over time</SectionTitle>
         <div className="chart px-box">
-          <div className="runs-chart">
-            <canvas ref={runsRef} role="img" aria-label="Pounds collected at each recorded cleanup, split into recyclable and non-recyclable" />
+          <div className="progress-chart">
+            <canvas
+              ref={progressRef}
+              role="img"
+              aria-label={`Running total of waste collected by term, reaching ${progress[progress.length - 1].total} lb, of which ${progress[progress.length - 1].recycled} lb recycled`}
+            />
           </div>
         </div>
       </section>
