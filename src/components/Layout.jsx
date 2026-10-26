@@ -1,59 +1,82 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
+import { sprites } from '../assets/sprites.js'
+import { links } from '../data/siteData.js'
+
+const navItems = [
+  { to: '/', label: 'Home', end: true },
+  { to: '/gallery', label: 'Gallery' },
+  { to: '/statistics', label: 'Stats' },
+  { to: '/about', label: 'About' },
+]
 
 export default function Layout() {
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
 
-  // Close the mobile menu whenever the route changes. Without this, the menu
-  // would stay open after tapping a link, because this single-page app no
-  // longer does a full page reload between pages (which used to reset it).
+  // Close the mobile menu and jump back to the top whenever the route changes,
+  // since this single-page app doesn't do a full page reload between pages.
   useEffect(() => {
     setMenuOpen(false)
-  }, [location])
+    window.scrollTo(0, 0)
+  }, [location.pathname])
 
   return (
     <>
-      <header>
-        <nav>
+      <a className="skip-link" href="#main">Skip to content</a>
+
+      <header className="site-header">
+        <nav className="nav container" aria-label="Main">
           <Link to="/" className="logo-container">
-            <div className="logo">
-              <img src={`${import.meta.env.BASE_URL}images/logo.jpg`} alt="Pickup UBC Logo" />
-            </div>
-            <span className="club-name">Pickup UBC</span>
+            <img className="logo" src={sprites.logoTv} alt="" />
+            <span className="club-name">Pickup<span>UBC</span></span>
           </Link>
-          <input
-            type="checkbox"
-            id="menu-toggle"
-            className="menu-toggle-checkbox"
-            checked={menuOpen}
-            onChange={(e) => setMenuOpen(e.target.checked)}
-          />
-          <label htmlFor="menu-toggle" className="menu-toggle">☰</label>
-          <ul className="nav-menu">
-            <li><NavLink to="/" end className="nav-link">Home</NavLink></li>
-            <li><NavLink to="/gallery" className="nav-link">Gallery</NavLink></li>
-            <li><NavLink to="/statistics" className="nav-link">Statistics</NavLink></li>
-            <li><NavLink to="/about" className="nav-link">About</NavLink></li>
+
+          <button
+            type="button"
+            className="menu-toggle"
+            aria-expanded={menuOpen}
+            aria-controls="nav-menu"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span className="sr-only">Menu</span>
+            <span aria-hidden="true">{menuOpen ? '✕' : '☰'}</span>
+          </button>
+
+          <ul id="nav-menu" className={`nav-menu ${menuOpen ? 'open' : ''}`}>
+            {navItems.map((item) => (
+              <li key={item.to}>
+                <NavLink to={item.to} end={item.end} className="nav-link">{item.label}</NavLink>
+              </li>
+            ))}
+            <li>
+              <a className="btn btn-small nav-cta" href={links.mailingList} target="_blank" rel="noopener noreferrer">Join</a>
+            </li>
           </ul>
         </nav>
       </header>
 
-      <main>
-        <section>
-          <Outlet />
-        </section>
+      <main id="main">
+        <Outlet />
       </main>
 
-      <footer>
-        <div className="footer-content">
-          <p>&copy; 2026 Pickup UBC. Making the world cleaner, one cleanup at a time.</p>
-          <div className="social-links">
-            <a href="https://www.instagram.com/pickupubc/" target="_blank" title="Instagram" rel="noopener noreferrer">Instagram</a>
-            <a href="mailto:pickupubcvan@gmail.com" title="Email" rel="noopener noreferrer">Email</a>
-            <a href="https://amsclubs.ca/pickupubc/" target="_blank" title="AMS Page" rel="noopener noreferrer">AMS Page</a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfeic7vXnaq8yEGBkF9zFfaDYOiedfs0pHiyhYfD2tG6GfVzQ/viewform" target="_blank" title="Mailing List" rel="noopener noreferrer">Mailing List</a>
+      <footer className="site-footer">
+        <div className="ground" aria-hidden="true" />
+        <div className="footer-content container">
+          <div className="footer-brand">
+            <img src={sprites.logoTv} alt="" />
+            <div>
+              <p className="footer-title">Continue?</p>
+              <p>Making the world cleaner, one cleanup at a time.</p>
+            </div>
           </div>
+          <ul className="social-links">
+            <li><a href={links.instagram} target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href={links.email}>Email</a></li>
+            <li><a href={links.ams} target="_blank" rel="noopener noreferrer">AMS Page</a></li>
+            <li><a href={links.mailingList} target="_blank" rel="noopener noreferrer">Mailing List</a></li>
+          </ul>
+          <p className="copyright">&copy; {new Date().getFullYear()} Pickup UBC · An AMS club at the University of British Columbia</p>
         </div>
       </footer>
     </>

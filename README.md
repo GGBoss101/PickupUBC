@@ -8,5 +8,11 @@ This is a [Vite](https://vite.dev) + React app.
 npm install     # install dependencies (first time only)
 npm run dev     # start the dev server at http://localhost:5173
 npm run build   # build for production into dist/
-npm run preview # locally preview the production build
+npm run preview # locally preview the production build (at /PickupUBC/)
 ```
+
+## Theme
+The site uses a retro / pixel-art theme. Sprites live in `src/assets/sprites/` (trimmed WebP copies of the
+artwork in `public/no_bg_design_images/`) and are registered in `src/assets/sprites.js`. Colors and fonts are
+CSS variables at the top of `src/style.css`. Page content lives in `src/data/` (stats, gallery entries, links
+and meeting schedule).

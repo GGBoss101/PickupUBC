@@ -4,6 +4,7 @@ import Home from './pages/Home.jsx'
 import Gallery from './pages/Gallery.jsx'
 import Statistics from './pages/Statistics.jsx'
 import About from './pages/About.jsx'
+import NotFound from './pages/NotFound.jsx'
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="gallery" element={<Gallery />} />
         <Route path="statistics" element={<Statistics />} />
         <Route path="about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   )

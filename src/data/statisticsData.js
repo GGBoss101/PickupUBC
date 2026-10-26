@@ -14,10 +14,10 @@ export const chartData = {
 }
 
 export const chartColors = {
-  '2024W1': ['green', '#bfd918'],
-  '2024W2': ['green', '#bfd918'],
-  '2025W1': ['green', '#bfd918'],
-  '2025W2': ['green', '#bfd918'],
+  '2024W1': ['#1fa774', '#e0457b'],
+  '2024W2': ['#1fa774', '#e0457b'],
+  '2025W1': ['#1fa774', '#e0457b'],
+  '2025W2': ['#1fa774', '#e0457b'],
 }
 
 export const termOptions = [
